@@ -5,7 +5,7 @@ const Post = require('../src/models/Post');
 
 beforeAll(async () => {
   // Conectar a um banco de dados de teste
-  const url = 'mongodb://localhost:27017/blogdb_test';
+  const url = 'mongodb://localhost:27017/blogdb';
   await mongoose.connect(url);
 });
 
