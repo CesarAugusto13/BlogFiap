@@ -22,9 +22,9 @@ jobs:
     - name: Instalar dependências
       run: npm install
 
-    - name: Configurar Docker
-      run: |
-        docker-compose up
+
+    - name: Rodar o projeto
+      run: npm run dev
 
     - name: Rodar os testes
       run: npm test
