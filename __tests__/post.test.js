@@ -2,10 +2,11 @@
   const app = require('../src/app');
   const mongoose = require('mongoose');
   const Post = require('../src/models/Post');
+  const dotenv = require('dotenv');
 
+  dotenv.config();
   beforeAll(async () => {
-    const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/blogdb';
-    await mongoose.connect(url);
+    await mongoose.connect(process.env.MONGO_URI);
   });
 
   afterEach(async () => {
@@ -29,6 +30,32 @@
       expect(response.status).toBe(201);
       expect(response.body).toHaveProperty('_id');
       expect(response.body.titulo).toBe('Post de Teste');
+    });
+
+    it('Deve listar todos os posts', async () => {
+      const response = await request(app)
+        .get('/api/posts');
+
+      expect(response.status).toBe(200);
+      expect(Array.isArray(response.body)).toBe(true);
+    });
+
+    it('Deve editar um post existente', async () => {
+      const post = await Post.create({
+        titulo: 'Post Original',
+        conteudo: 'Conteúdo original.',
+        autor: 'Jest'
+      });
+
+      const response = await request(app)
+        .put(`/api/posts/${post._id}`)
+        .send({
+          titulo: 'Post Editado',
+          conteudo: 'Conteúdo editado.'
+        });
+
+      expect(response.status).toBe(200);
+      expect(response.body.titulo).toBe('Post Editado');
     });
 
   });
