@@ -4,18 +4,15 @@
   const Post = require('../src/models/Post');
 
   beforeAll(async () => {
-    // Conectar a um banco de dados de teste
     const url = process.env.MONGODB_URI || 'mongodb://localhost:27017/blogdb';
     await mongoose.connect(url);
   });
 
   afterEach(async () => {
-    // Limpar a coleção de posts após cada teste
     await Post.deleteMany();
   });
 
   afterAll(async () => {
-    // Desconectar do banco
     await mongoose.connection.close();
   });
 
@@ -34,5 +31,4 @@
       expect(response.body.titulo).toBe('Post de Teste');
     });
 
-    // Escreva outros testes aqui...
   });

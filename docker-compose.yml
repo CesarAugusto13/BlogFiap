@@ -7,7 +7,6 @@ services:
     volumes:
       - .:/usr/src/app
     environment:
-      # Conecta ao serviço 'mongo' definido abaixo
       MONGO_URI: mongodb://mongo:27017/blogdb 
       PORT: 3000
     depends_on:
