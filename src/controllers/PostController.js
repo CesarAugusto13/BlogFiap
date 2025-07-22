@@ -77,7 +77,8 @@ exports.searchPosts = async (req, res) => {
     const posts = await Post.find({
       $or: [
         { titulo: { $regex: q, $options: 'i' } },
-        { conteudo: { $regex: q, $options: 'i' } }
+        { conteudo: { $regex: q, $options: 'i' } },
+        { autor: { $regex: q, $options: 'i' } }
       ]
     });
     res.status(200).json(posts);
