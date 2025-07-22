@@ -113,4 +113,14 @@ O projeto conta com uma suíte de testes unitários e de integração para garan
 Integração Contínua (CI):
 Um workflow do GitHub Actions foi configurado para executar os testes automaticamente a cada push ou pull request, garantindo que o código na branch principal esteja sempre estável e funcional.
 
+## 6. Experiências e Desafios
+Durante o desenvolvimento, enfrentei alguns desafios que foram cruciais para o aprendizado:
+
+Conectividade entre Contêineres Docker: O principal desafio inicial foi entender como a aplicação Node.js, rodando em um contêiner, se conectaria ao banco de dados em outro contêiner. A solução foi utilizar o nome do serviço (mongo) definido no docker-compose.yml na string de conexão, em vez de localhost. Isso solidificou meu entendimento sobre redes Docker.
+
+Implementação do Pipeline de CI/CD: Um dos desafios mais significativos foi a configuração da Integração Contínua com GitHub Actions. Entender a sintaxe dos arquivos YAML, a sequência de `steps` (checkout, setup do Node, instalação de dependências, execução dos testes) e como o ambiente virtual do GitHub Actions funciona exigiu pesquisa e algumas tentativas. Superar essa barreira foi extremamente gratificante, pois me permitiu automatizar um processo essencial para a garantia de qualidade do software, vendo o pipeline rodar com sucesso após cada `push`.
+
+Configuração do Ambiente Git: No início do projeto, houve uma pequena confusão entre as branches main e master. O processo de fazer o merge, definir main como a branch padrão e limpar a branch antiga foi um excelente exercício prático de gerenciamento de repositórios com Git, reforçando a importância de manter um histórico limpo e organizado.
+
+
 César Augusto de Oliveira Santos - [LinkedIn](https://www.linkedin.com/in/c%C3%A9sar-augusto-de-oliveira-santos/)
