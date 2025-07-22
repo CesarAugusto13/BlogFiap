@@ -112,3 +112,5 @@ O projeto conta com uma suíte de testes unitários e de integração para garan
 
 Integração Contínua (CI):
 Um workflow do GitHub Actions foi configurado para executar os testes automaticamente a cada push ou pull request, garantindo que o código na branch principal esteja sempre estável e funcional.
+
+César Augusto de Oliveira Santos - [LinkedIn](https://www.linkedin.com/in/c%C3%A9sar-augusto-de-oliveira-santos/)
