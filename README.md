@@ -50,18 +50,30 @@ A solução foi desenvolvida como uma API RESTful containerizada, seguindo as me
 
 A estrutura de pastas foi pensada para separar as responsabilidades, seguindo o padrão MVC (Model-View-Controller) adaptado para APIs:
 
-├── .github/workflows/ # Automação de CI/CD
-├── tests/ # Suíte de testes
+```text
+/BlogFiap
+├── .github/
+│   └── workflows/
+│       └── ci.yml
 ├── src/
-│ ├── controllers/ # Lógica de negócio
-│ ├── models/ # Definição dos schemas do banco
-│ ├── routes/ # Definição dos endpoints
-│ ├── app.js # Configurações do Express
-│ └── server.js # Ponto de entrada do servidor
+│   ├── controllers/
+│   │   └── PostController.js
+│   ├── models/
+│   │   └── Post.js
+│   ├── routes/
+│   │   └── postRoutes.js
+│   ├── app.js
+│   └── server.js
+├── __tests__/
+│   └── posts.test.js
+├── .dockerignore
+├── .env.example
 ├── .gitignore
-├── docker-compose.yml # Orquestração dos serviços
-├── Dockerfile # Imagem Docker da aplicação
-└── package.json
+├── docker-compose.yml
+├── Dockerfile
+├── package-lock.json
+├── package.json
+└── README.md
 
 ## 3. Como Executar a Aplicação
 
