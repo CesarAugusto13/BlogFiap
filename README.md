@@ -74,7 +74,7 @@ A estrutura de pastas foi pensada para separar as responsabilidades, seguindo o 
 ├── package-lock.json
 ├── package.json
 └── README.md
-
+```
 ## 3. Como Executar a Aplicação
 
 Para rodar este projeto, você precisará ter **Docker** e **Docker Compose** instalados em sua máquina.
