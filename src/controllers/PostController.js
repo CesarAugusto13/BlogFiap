@@ -3,7 +3,7 @@ const Post = require('../models/Post');
 exports.createPost = async (req, res) => {
   try {
     const { titulo, conteudo, autor } = req.body;
-    const newPost = new Post({ titulo, conteudo, autor });
+    const newPost = new Post({ titulo, conteudo, autor, curtidas: 0, comentarios: [] });
     await newPost.save();
     res.status(201).json(newPost);
   } catch (error) {
