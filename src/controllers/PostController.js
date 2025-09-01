@@ -86,3 +86,38 @@ exports.searchPosts = async (req, res) => {
     res.status(500).json({ message: 'Erro na busca', error: error.message });
   }
 };
+
+exports.incrementLike = async (req, res) => {
+  try {
+    const post = await Post.findByIdAndUpdate(
+      req.params.id,
+      { $inc: { curtidas: 1 } },
+      { new: true }
+    );
+    if (!post) {
+      return res.status(404).json({ message: 'Post não encontrado.' });
+    }
+    res.status(200).json(post);
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao curtir o post.', error: error.message });
+  }
+};
+
+exports.addComment = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { conteudo } = req.body;
+    if (!conteudo || conteudo.trim() === '') {
+      return res.status(400).json({ message: 'Conteúdo do comentário é obrigatório.' });
+    }
+    const post = await Post.findById(id);
+    if (!post) {
+      return res.status(404).json({ message: 'Post não encontrado.' });
+    }
+    post.comentarios.push({ conteudo });
+    await post.save();
+    res.status(201).json(post.comentarios[post.comentarios.length - 1]);
+  } catch (error) {
+    res.status(500).json({ message: 'Erro ao adicionar comentário.', error: error.message });
+  }
+};
