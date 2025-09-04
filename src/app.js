@@ -1,12 +1,16 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
-const postRoutes = require('./routes/postRoutes');
 const cors = require('cors');
+
+const postRoutes = require('./routes/postRoutes');
+const professorRoutes = require('./routes/professorRoutes');
 
 app.use(express.json());
 app.use(cors());
-app.use('/api', postRoutes); 
+
+app.use('/api', postRoutes);
+app.use('/api/professores', professorRoutes);
 
 app.get('/', (req, res) => {
   res.status(200).send({ status: 'OK', message: 'Servidor rodando!' });
