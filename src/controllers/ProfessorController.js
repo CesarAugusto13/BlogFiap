@@ -62,7 +62,7 @@ exports.login = async (req, res) => {
     const token = jwt.sign(
       { id: professor._id, nome: professor.nome, email: professor.email },
       JWT_SECRET,
-      { expiresIn: '1d' }
+      { expiresIn: '30d' }
     );
 
     return res.json({ token, nome: professor.nome, email: professor.email });
