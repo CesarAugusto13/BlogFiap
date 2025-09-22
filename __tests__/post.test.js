@@ -5,6 +5,7 @@
   const dotenv = require('dotenv');
 
   dotenv.config();
+  const authToken = process.env.AUTH_SECRET;
   beforeAll(async () => {
     await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/blogdb_test');
   });
@@ -19,8 +20,10 @@
 
   describe('API de Posts', () => {
     it('Deve criar um novo post com sucesso', async () => {
+      
       const response = await request(app)
         .post('/api/posts')
+        .set('Authorization', `Bearer ${authToken}`)
         .send({
           titulo: 'Post de Teste',
           conteudo: 'Conteúdo do post de teste.',
@@ -49,6 +52,7 @@
 
       const response = await request(app)
         .put(`/api/posts/${post._id}`)
+        .set('Authorization', `Bearer ${authToken}`)
         .send({
           titulo: 'Post Editado',
           conteudo: 'Conteúdo editado.'
