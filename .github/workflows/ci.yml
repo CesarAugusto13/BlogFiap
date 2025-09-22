@@ -12,7 +12,6 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
-    # (OPCIONAL, MAS RECOMENDADO) Inicia um serviço de MongoDB para os testes
     services:
       mongo:
         image: mongo
@@ -33,9 +32,7 @@ jobs:
       run: npm ci # 'ci' é geralmente melhor para CI/CD do que 'install'
 
     - name: Executar testes com Jest
-      # AQUI ESTÁ A MÁGICA!
-      # Este bloco injeta os secrets do GitHub como variáveis de ambiente
-      # antes do comando 'npm test' ser executado.
+
       run: npm test
       env:
         MONGO_URI: ${{ secrets.MONGO_URI }}
