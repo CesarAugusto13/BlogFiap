@@ -1,33 +1,43 @@
-name: Node.js CI
+# .github/workflows/ci-cd.yml
+
+name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [ main ]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ main ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
+    # (OPCIONAL, MAS RECOMENDADO) Inicia um serviço de MongoDB para os testes
     services:
-      mongodb:
-        image: mongo:latest
+      mongo:
+        image: mongo
         ports:
           - 27017:27017
-      
 
     steps:
-    - name: Checkout código
+    - name: Checkout do código
       uses: actions/checkout@v3
 
     - name: Configurar Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: 18 # Ou a versão que você usa
+        cache: 'npm'
 
     - name: Instalar dependências
-      run: npm install
+      run: npm ci # 'ci' é geralmente melhor para CI/CD do que 'install'
 
-    - name: Run tests
+    - name: Executar testes com Jest
+      # AQUI ESTÁ A MÁGICA!
+      # Este bloco injeta os secrets do GitHub como variáveis de ambiente
+      # antes do comando 'npm test' ser executado.
       run: npm test
+      env:
+        MONGO_URI: ${{ secrets.MONGO_URI }}
+        TEST_AUTH_TOKEN: ${{ secrets.TEST_AUTH_TOKEN }}
+        AUTH_SECRET: ${{ secrets.AUTH_SECRET }}
