@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const professorController = require('../controllers/ProfessorController');
-const auth = require('../middlewares/auth'); // arquivo auth.js
+const auth = require('../middleware/auth'); // arquivo auth.js
 
 router.post('/register', professorController.register);
 router.post('/login', professorController.login);
